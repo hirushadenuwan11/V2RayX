@@ -1,32 +1,27 @@
 /* =====================================================
    V2RayX CUSTOMER PAGE JAVASCRIPT
+   GitHub Pages Fixed Version
 ===================================================== */
 
 
-/*
-=========================================================
-GOOGLE APPS SCRIPT API
-=========================================================
-*/
+/* =====================================================
+   GOOGLE APPS SCRIPT API
+===================================================== */
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbzzg-3FoJiE73IXu1kavRGRp-JXEVmdxy7m4O2vjLggK59yE9MviWrekx2NX9SyZZEZmA/exec";
 
 
-/*
-=========================================================
-WHATSAPP NUMBER
-=========================================================
-*/
+/* =====================================================
+   WHATSAPP NUMBER
+===================================================== */
 
 const WHATSAPP_NUMBER = "94771234567";
 
 
-/*
-=========================================================
-CURRENT ORDER
-=========================================================
-*/
+/* =====================================================
+   CURRENT ORDER
+===================================================== */
 
 let currentOrder = {
     plan: "",
@@ -35,46 +30,41 @@ let currentOrder = {
 };
 
 
-/*
-=========================================================
-YEAR
-=========================================================
-*/
+/* =====================================================
+   YEAR
+===================================================== */
 
-document.addEventListener("DOMContentLoaded", function(){
+function setYear() {
 
-    const year =
+    const yearElement =
         document.getElementById("year");
 
-    if(year){
+    if (yearElement) {
 
-        year.textContent =
+        yearElement.textContent =
             new Date().getFullYear();
 
     }
 
-});
+}
 
 
-/*
-=========================================================
-MOBILE MENU
-=========================================================
-*/
+/* =====================================================
+   MOBILE MENU
+===================================================== */
 
-function toggleMobileMenu(){
+function toggleMobileMenu() {
 
     const menu =
         document.getElementById("mobileMenu");
 
-    if(!menu) return;
+    if (!menu) return;
 
-
-    if(menu.style.display === "block"){
+    if (menu.style.display === "block") {
 
         menu.style.display = "none";
 
-    }else{
+    } else {
 
         menu.style.display = "block";
 
@@ -83,12 +73,12 @@ function toggleMobileMenu(){
 }
 
 
-function closeMobileMenu(){
+function closeMobileMenu() {
 
     const menu =
         document.getElementById("mobileMenu");
 
-    if(menu){
+    if (menu) {
 
         menu.style.display = "none";
 
@@ -97,38 +87,40 @@ function closeMobileMenu(){
 }
 
 
-/*
-=========================================================
-SCROLL TO PLANS
-=========================================================
-*/
+/* =====================================================
+   SCROLL TO PLANS
+===================================================== */
 
-function scrollToPlans(){
+function scrollToPlans() {
 
     const plans =
         document.getElementById("plans");
 
-    if(!plans) return;
+    if (!plans) {
 
+        console.error("Plans section not found.");
+
+        return;
+
+    }
 
     plans.scrollIntoView({
-        behavior: "smooth"
+        behavior: "smooth",
+        block: "start"
     });
 
 }
 
 
-/*
-=========================================================
-OPEN ORDER
-=========================================================
-*/
+/* =====================================================
+   OPEN ORDER
+===================================================== */
 
 function openOrder(
     plan,
     duration,
     price
-){
+) {
 
     currentOrder.plan =
         plan;
@@ -153,7 +145,7 @@ function openOrder(
         document.getElementById("orderModal");
 
 
-    if(orderPlan){
+    if (orderPlan) {
 
         orderPlan.textContent =
             plan;
@@ -161,7 +153,7 @@ function openOrder(
     }
 
 
-    if(orderDuration){
+    if (orderDuration) {
 
         orderDuration.textContent =
             duration;
@@ -169,7 +161,7 @@ function openOrder(
     }
 
 
-    if(orderPrice){
+    if (orderPrice) {
 
         orderPrice.textContent =
             "Rs. " + price;
@@ -177,7 +169,7 @@ function openOrder(
     }
 
 
-    if(orderModal){
+    if (orderModal) {
 
         orderModal.style.display =
             "block";
@@ -191,13 +183,11 @@ function openOrder(
 }
 
 
-/*
-=========================================================
-CLOSE ORDER
-=========================================================
-*/
+/* =====================================================
+   CLOSE ORDER
+===================================================== */
 
-function closeOrder(){
+function closeOrder() {
 
     const orderModal =
         document.getElementById("orderModal");
@@ -212,7 +202,7 @@ function closeOrder(){
         document.getElementById("orderForm");
 
 
-    if(orderModal){
+    if (orderModal) {
 
         orderModal.style.display =
             "none";
@@ -220,7 +210,7 @@ function closeOrder(){
     }
 
 
-    if(orderFormArea){
+    if (orderFormArea) {
 
         orderFormArea.style.display =
             "block";
@@ -228,7 +218,7 @@ function closeOrder(){
     }
 
 
-    if(orderSuccess){
+    if (orderSuccess) {
 
         orderSuccess.style.display =
             "none";
@@ -236,7 +226,7 @@ function closeOrder(){
     }
 
 
-    if(orderForm){
+    if (orderForm) {
 
         orderForm.reset();
 
@@ -249,13 +239,11 @@ function closeOrder(){
 }
 
 
-/*
-=========================================================
-ORDER ID
-=========================================================
-*/
+/* =====================================================
+   GENERATE ORDER ID
+===================================================== */
 
-function generateOrderId(){
+function generateOrderId() {
 
     const random =
         Math.floor(
@@ -263,60 +251,62 @@ function generateOrderId(){
             Math.random() * 90000
         );
 
-
     return "V2-" + random;
 
 }
 
 
-/*
-=========================================================
-VALIDATE PHONE
-=========================================================
-*/
+/* =====================================================
+   PHONE VALIDATION
+===================================================== */
 
-function validatePhone(phone){
+function validatePhone(phone) {
 
     const cleaned =
         phone.replace(/\s+/g, "");
 
-
-    return /^0[0-9]{9}$/.test(
-        cleaned
-    );
+    return /^0[0-9]{9}$/.test(cleaned);
 
 }
 
 
-/*
-=========================================================
-SEND ORDER TO GOOGLE SHEET
-=========================================================
-*/
+/* =====================================================
+   SEND ORDER TO GOOGLE APPS SCRIPT
+===================================================== */
 
 function sendOrderToGoogleSheet(
     orderData,
     callback
-){
+) {
+
+    if (!API_URL) {
+
+        console.error(
+            "Google Apps Script URL is empty."
+        );
+
+        alert(
+            "Backend URL is not configured."
+        );
+
+        return;
+
+    }
+
 
     /*
-    =============================================
-    CREATE HIDDEN IFRAME
-    =============================================
+    Create hidden iframe
     */
 
     const iframe =
         document.createElement("iframe");
 
-
     iframe.name =
-        "googleOrderFrame_" +
+        "v2rayOrderFrame_" +
         Date.now();
-
 
     iframe.style.display =
         "none";
-
 
     document.body.appendChild(
         iframe
@@ -324,57 +314,45 @@ function sendOrderToGoogleSheet(
 
 
     /*
-    =============================================
-    CREATE HIDDEN FORM
-    =============================================
+    Create hidden form
     */
 
     const form =
         document.createElement("form");
 
-
     form.method =
         "POST";
-
 
     form.action =
         API_URL;
 
-
     form.target =
         iframe.name;
-
 
     form.style.display =
         "none";
 
 
     /*
-    =============================================
-    ADD FIELD FUNCTION
-    =============================================
+    Add input
     */
 
     function addField(
-        fieldName,
-        fieldValue
-    ){
+        name,
+        value
+    ) {
 
         const input =
             document.createElement("input");
 
-
         input.type =
             "hidden";
 
-
         input.name =
-            fieldName;
-
+            name;
 
         input.value =
-            fieldValue || "";
-
+            value || "";
 
         form.appendChild(
             input
@@ -384,9 +362,7 @@ function sendOrderToGoogleSheet(
 
 
     /*
-    =============================================
-    SEND DATA
-    =============================================
+    Send order fields
     */
 
     addField(
@@ -394,54 +370,61 @@ function sendOrderToGoogleSheet(
         orderData.orderId
     );
 
+    addField(
+        "name",
+        orderData.name
+    );
 
     addField(
         "customerName",
         orderData.name
     );
 
-
     addField(
         "phone",
         orderData.phone
     );
-
 
     addField(
         "email",
         orderData.email
     );
 
+    addField(
+        "plan",
+        orderData.plan
+    );
 
     addField(
         "package",
         orderData.plan
     );
 
-
     addField(
         "duration",
         orderData.duration
     );
-
 
     addField(
         "price",
         orderData.price
     );
 
+    addField(
+        "payment",
+        orderData.payment
+    );
 
     addField(
         "paymentMethod",
         orderData.payment
     );
 
+    addField(
+        "createdAt",
+        orderData.createdAt
+    );
 
-    /*
-    =============================================
-    ADD FORM
-    =============================================
-    */
 
     document.body.appendChild(
         form
@@ -449,220 +432,234 @@ function sendOrderToGoogleSheet(
 
 
     /*
-    =============================================
-    SUBMIT
-    =============================================
+    Submit
     */
 
-    form.submit();
+    try {
+
+        form.submit();
+
+    } catch (error) {
+
+        console.error(
+            "Order submit error:",
+            error
+        );
+
+        alert(
+            "Unable to send order."
+        );
+
+        form.remove();
+        iframe.remove();
+
+        return;
+
+    }
 
 
     /*
-    =============================================
-    SUCCESS CALLBACK
-    =============================================
-    
-    Google Apps Script receives the order.
-    
-    Since GitHub Pages cannot directly read the
-    cross-origin response, we show success after
-    submitting the form.
+    Google Apps Script response
+    is cross-origin, so we don't
+    read it directly.
+
     */
 
-    setTimeout(function(){
+    setTimeout(function() {
 
-        callback();
+        if (callback) {
 
+            callback();
 
-        /*
-        =========================================
-        CLEANUP
-        =========================================
-        */
+        }
 
-        setTimeout(function(){
+        setTimeout(function() {
 
             form.remove();
-
             iframe.remove();
 
         }, 3000);
 
-    }, 1200);
+    }, 1500);
 
 }
 
 
-/*
-=========================================================
-SUBMIT ORDER
-=========================================================
-*/
+/* =====================================================
+   ORDER FORM
+===================================================== */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+function setupOrderForm() {
 
-        const orderForm =
-            document.getElementById(
-                "orderForm"
-            );
+    const orderForm =
+        document.getElementById(
+            "orderForm"
+        );
 
+    if (!orderForm) {
 
-        if(!orderForm) return;
+        console.error(
+            "orderForm not found."
+        );
 
+        return;
 
-        orderForm.addEventListener(
-            "submit",
-            function(event){
-
-                event.preventDefault();
+    }
 
 
-                /*
-                =============================================
-                GET CUSTOMER DETAILS
-                =============================================
-                */
+    orderForm.addEventListener(
+        "submit",
+        function(event) {
 
-                const name =
-                    document
-                        .getElementById(
-                            "customerName"
-                        )
-                        .value
-                        .trim();
+            event.preventDefault();
 
 
-                const phone =
-                    document
-                        .getElementById(
-                            "customerPhone"
-                        )
-                        .value
-                        .trim();
+            const nameInput =
+                document.getElementById(
+                    "customerName"
+                );
+
+            const phoneInput =
+                document.getElementById(
+                    "customerPhone"
+                );
+
+            const emailInput =
+                document.getElementById(
+                    "customerEmail"
+                );
+
+            const paymentInput =
+                document.getElementById(
+                    "paymentMethod"
+                );
 
 
-                const email =
-                    document
-                        .getElementById(
-                            "customerEmail"
-                        )
-                        .value
-                        .trim();
+            const name =
+                nameInput ?
+                nameInput.value.trim() :
+                "";
+
+            const phone =
+                phoneInput ?
+                phoneInput.value.trim() :
+                "";
+
+            const email =
+                emailInput ?
+                emailInput.value.trim() :
+                "";
+
+            const payment =
+                paymentInput ?
+                paymentInput.value :
+                "";
 
 
-                const payment =
-                    document
-                        .getElementById(
-                            "paymentMethod"
-                        )
-                        .value;
+            /* =========================
+               VALIDATION
+            ========================= */
+
+            if (name.length < 2) {
+
+                alert(
+                    "Please enter your full name."
+                );
+
+                return;
+
+            }
 
 
-                /*
-                =============================================
-                VALIDATION
-                =============================================
-                */
+            if (!validatePhone(phone)) {
 
-                if(name.length < 2){
+                alert(
+                    "Please enter a valid WhatsApp number."
+                );
 
-                    alert(
-                        "Please enter your full name."
-                    );
+                return;
 
-                    return;
-
-                }
+            }
 
 
-                if(!validatePhone(phone)){
+            if (!email) {
 
-                    alert(
-                        "Please enter a valid WhatsApp number."
-                    );
+                alert(
+                    "Please enter your email address."
+                );
 
-                    return;
+                return;
 
-                }
-
-
-                if(!email){
-
-                    alert(
-                        "Please enter your email address."
-                    );
-
-                    return;
-
-                }
+            }
 
 
-                if(!payment){
+            if (!payment) {
 
-                    alert(
-                        "Please select a payment method."
-                    );
+                alert(
+                    "Please select a payment method."
+                );
 
-                    return;
+                return;
 
-                }
-
-
-                /*
-                =============================================
-                CREATE ORDER ID
-                =============================================
-                */
-
-                const orderId =
-                    generateOrderId();
+            }
 
 
-                /*
-                =============================================
-                ORDER DATA
-                =============================================
-                */
+            if (!currentOrder.plan) {
 
-                const orderData = {
+                alert(
+                    "Please select a plan first."
+                );
 
-                    orderId:
-                        orderId,
+                return;
 
-                    name:
-                        name,
-
-                    phone:
-                        phone,
-
-                    email:
-                        email,
-
-                    plan:
-                        currentOrder.plan,
-
-                    duration:
-                        currentOrder.duration,
-
-                    price:
-                        currentOrder.price,
-
-                    payment:
-                        payment,
-
-                    createdAt:
-                        new Date().toISOString()
-
-                };
+            }
 
 
-                /*
-                =============================================
-                SAVE LOCAL COPY
-                =============================================
-                */
+            /* =========================
+               CREATE ORDER
+            ========================= */
+
+            const orderId =
+                generateOrderId();
+
+
+            const orderData = {
+
+                orderId:
+                    orderId,
+
+                name:
+                    name,
+
+                phone:
+                    phone,
+
+                email:
+                    email,
+
+                plan:
+                    currentOrder.plan,
+
+                duration:
+                    currentOrder.duration,
+
+                price:
+                    currentOrder.price,
+
+                payment:
+                    payment,
+
+                createdAt:
+                    new Date().toISOString()
+
+            };
+
+
+            /* =========================
+               LOCAL STORAGE
+            ========================= */
+
+            try {
 
                 localStorage.setItem(
                     "lastOrder",
@@ -671,86 +668,85 @@ document.addEventListener(
                     )
                 );
 
+            } catch (error) {
 
-                /*
-                =============================================
-                BUTTON
-                =============================================
-                */
-
-                const submitButton =
-                    orderForm.querySelector(
-                        ".modal-submit"
-                    );
-
-
-                if(submitButton){
-
-                    submitButton.disabled =
-                        true;
-
-                    submitButton.textContent =
-                        "Creating Order...";
-
-                }
-
-
-                /*
-                =============================================
-                SEND TO GOOGLE SHEET
-                =============================================
-                */
-
-                sendOrderToGoogleSheet(
-                    orderData,
-                    function(){
-
-                        showOrderSuccess(
-                            orderId
-                        );
-
-
-                        if(submitButton){
-
-                            submitButton.disabled =
-                                false;
-
-                            submitButton.textContent =
-                                "Continue to Payment →";
-
-                        }
-
-                    }
+                console.log(
+                    "LocalStorage unavailable."
                 );
 
             }
-        );
-
-    }
-);
 
 
-/*
-=========================================================
-SHOW ORDER SUCCESS
-=========================================================
-*/
+            /* =========================
+               BUTTON
+            ========================= */
+
+            const submitButton =
+                orderForm.querySelector(
+                    ".modal-submit"
+                );
+
+
+            if (submitButton) {
+
+                submitButton.disabled =
+                    true;
+
+                submitButton.textContent =
+                    "Creating Order...";
+
+            }
+
+
+            /* =========================
+               SEND
+            ========================= */
+
+            sendOrderToGoogleSheet(
+                orderData,
+                function() {
+
+                    showOrderSuccess(
+                        orderId
+                    );
+
+
+                    if (submitButton) {
+
+                        submitButton.disabled =
+                            false;
+
+                        submitButton.textContent =
+                            "Continue to Payment →";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SHOW ORDER SUCCESS
+===================================================== */
 
 function showOrderSuccess(
     orderId
-){
+) {
 
     const orderFormArea =
         document.getElementById(
             "orderFormArea"
         );
 
-
     const orderSuccess =
         document.getElementById(
             "orderSuccess"
         );
-
 
     const generatedOrderId =
         document.getElementById(
@@ -758,7 +754,7 @@ function showOrderSuccess(
         );
 
 
-    if(orderFormArea){
+    if (orderFormArea) {
 
         orderFormArea.style.display =
             "none";
@@ -766,7 +762,7 @@ function showOrderSuccess(
     }
 
 
-    if(orderSuccess){
+    if (orderSuccess) {
 
         orderSuccess.style.display =
             "block";
@@ -774,7 +770,7 @@ function showOrderSuccess(
     }
 
 
-    if(generatedOrderId){
+    if (generatedOrderId) {
 
         generatedOrderId.textContent =
             orderId;
@@ -784,26 +780,21 @@ function showOrderSuccess(
 }
 
 
-/*
-=========================================================
-LOGIN MODAL
-=========================================================
-*/
+/* =====================================================
+   LOGIN
+===================================================== */
 
-function openLogin(){
+function openLogin() {
 
     const loginModal =
         document.getElementById(
             "loginModal"
         );
 
-
-    if(!loginModal) return;
-
+    if (!loginModal) return;
 
     loginModal.style.display =
         "block";
-
 
     document.body.style.overflow =
         "hidden";
@@ -811,21 +802,19 @@ function openLogin(){
 }
 
 
-function closeLogin(){
+function closeLogin() {
 
     const loginModal =
         document.getElementById(
             "loginModal"
         );
 
-
-    if(loginModal){
+    if (loginModal) {
 
         loginModal.style.display =
             "none";
 
     }
-
 
     document.body.style.overflow =
         "";
@@ -833,13 +822,11 @@ function closeLogin(){
 }
 
 
-/*
-=========================================================
-REGISTER MODAL
-=========================================================
-*/
+/* =====================================================
+   REGISTER
+===================================================== */
 
-function openRegister(){
+function openRegister() {
 
     closeLogin();
 
@@ -849,13 +836,11 @@ function openRegister(){
             "registerModal"
         );
 
-
-    if(!registerModal) return;
+    if (!registerModal) return;
 
 
     registerModal.style.display =
         "block";
-
 
     document.body.style.overflow =
         "hidden";
@@ -863,21 +848,19 @@ function openRegister(){
 }
 
 
-function closeRegister(){
+function closeRegister() {
 
     const registerModal =
         document.getElementById(
             "registerModal"
         );
 
-
-    if(registerModal){
+    if (registerModal) {
 
         registerModal.style.display =
             "none";
 
     }
-
 
     document.body.style.overflow =
         "";
@@ -885,7 +868,7 @@ function closeRegister(){
 }
 
 
-function openLoginFromRegister(){
+function openLoginFromRegister() {
 
     closeRegister();
 
@@ -894,89 +877,73 @@ function openLoginFromRegister(){
 }
 
 
-/*
-=========================================================
-LOGIN DEMO
-=========================================================
-*/
+/* =====================================================
+   LOGIN FORM
+===================================================== */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+function setupLoginForm() {
 
-        const loginForm =
-            document.getElementById(
-                "loginForm"
-            );
-
-
-        if(!loginForm) return;
-
-
-        loginForm.addEventListener(
-            "submit",
-            function(event){
-
-                event.preventDefault();
-
-
-                alert(
-                    "Login backend is not connected yet."
-                );
-
-            }
+    const loginForm =
+        document.getElementById(
+            "loginForm"
         );
 
-    }
-);
+    if (!loginForm) return;
 
 
-/*
-=========================================================
-REGISTER DEMO
-=========================================================
-*/
+    loginForm.addEventListener(
+        "submit",
+        function(event) {
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+            event.preventDefault();
 
-        const registerForm =
-            document.getElementById(
-                "registerForm"
+            alert(
+                "Login backend is not connected yet."
             );
 
+        }
+    );
 
-        if(!registerForm) return;
-
-
-        registerForm.addEventListener(
-            "submit",
-            function(event){
-
-                event.preventDefault();
+}
 
 
-                alert(
-                    "Registration backend is not connected yet."
-                );
+/* =====================================================
+   REGISTER FORM
+===================================================== */
 
-            }
+function setupRegisterForm() {
+
+    const registerForm =
+        document.getElementById(
+            "registerForm"
         );
 
-    }
-);
+    if (!registerForm) return;
 
 
-/*
-=========================================================
-WHATSAPP
-=========================================================
-*/
+    registerForm.addEventListener(
+        "submit",
+        function(event) {
 
-function openWhatsApp(){
+            event.preventDefault();
 
-    if(!WHATSAPP_NUMBER){
+            alert(
+                "Registration backend is not connected yet."
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function openWhatsApp() {
+
+    if (!WHATSAPP_NUMBER) {
 
         alert(
             "WhatsApp number is not configured."
@@ -1004,86 +971,158 @@ function openWhatsApp(){
 }
 
 
-/*
-=========================================================
-CLOSE MODALS WHEN CLICK OUTSIDE
-=========================================================
-*/
+/* =====================================================
+   CLOSE MODALS OUTSIDE
+===================================================== */
 
-window.addEventListener(
-    "click",
-    function(event){
+function setupOutsideClick() {
 
-        const orderModal =
-            document.getElementById(
-                "orderModal"
-            );
+    window.addEventListener(
+        "click",
+        function(event) {
 
+            const orderModal =
+                document.getElementById(
+                    "orderModal"
+                );
 
-        const loginModal =
-            document.getElementById(
-                "loginModal"
-            );
+            const loginModal =
+                document.getElementById(
+                    "loginModal"
+                );
 
-
-        const registerModal =
-            document.getElementById(
-                "registerModal"
-            );
+            const registerModal =
+                document.getElementById(
+                    "registerModal"
+                );
 
 
-        if(
-            orderModal &&
-            event.target === orderModal
-        ){
+            if (
+                orderModal &&
+                event.target === orderModal
+            ) {
 
-            closeOrder();
+                closeOrder();
+
+            }
+
+
+            if (
+                loginModal &&
+                event.target === loginModal
+            ) {
+
+                closeLogin();
+
+            }
+
+
+            if (
+                registerModal &&
+                event.target === registerModal
+            ) {
+
+                closeRegister();
+
+            }
 
         }
+    );
+
+}
 
 
-        if(
-            loginModal &&
-            event.target === loginModal
-        ){
+/* =====================================================
+   ESC KEY
+===================================================== */
 
-            closeLogin();
+function setupEscapeKey() {
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeOrder();
+
+                closeLogin();
+
+                closeRegister();
+
+            }
 
         }
+    );
+
+}
 
 
-        if(
-            registerModal &&
-            event.target === registerModal
-        ){
+/* =====================================================
+   MAKE FUNCTIONS GLOBAL
+   IMPORTANT FOR HTML onclick=""
+===================================================== */
 
-            closeRegister();
+window.toggleMobileMenu =
+    toggleMobileMenu;
 
-        }
+window.closeMobileMenu =
+    closeMobileMenu;
 
-    }
-);
+window.scrollToPlans =
+    scrollToPlans;
+
+window.openOrder =
+    openOrder;
+
+window.closeOrder =
+    closeOrder;
+
+window.openLogin =
+    openLogin;
+
+window.closeLogin =
+    closeLogin;
+
+window.openRegister =
+    openRegister;
+
+window.closeRegister =
+    closeRegister;
+
+window.openLoginFromRegister =
+    openLoginFromRegister;
+
+window.openWhatsApp =
+    openWhatsApp;
 
 
-/*
-=========================================================
-ESC KEY CLOSE MODALS
-=========================================================
-*/
+/* =====================================================
+   START
+===================================================== */
 
 document.addEventListener(
-    "keydown",
-    function(event){
+    "DOMContentLoaded",
+    function() {
 
-        if(event.key === "Escape"){
+        console.log(
+            "V2RayX JavaScript Loaded Successfully"
+        );
 
-            closeOrder();
 
-            closeLogin();
+        setYear();
 
-            closeRegister();
+        setupOrderForm();
 
-        }
+        setupLoginForm();
+
+        setupRegisterForm();
+
+        setupOutsideClick();
+
+        setupEscapeKey();
 
     }
 );
