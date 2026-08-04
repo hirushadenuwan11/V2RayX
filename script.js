@@ -16,11 +16,11 @@ connect කළාම මෙතන URL එක දාන්න.
 Example:
 
 const API_URL =
-"https://script.google.com/macros/s/XXXXXXXX/exec";
+"https://script.google.com/macros/s/AKfycbzzg-3FoJiE73IXu1kavRGRp-JXEVmdxy7m4O2vjLggK59yE9MviWrekx2NX9SyZZEZmA/exec";
 
 */
 
-const API_URL = "";
+const API_URL = "https://script.google.com/macros/s/AKfycbzzg-3FoJiE73IXu1kavRGRp-JXEVmdxy7m4O2vjLggK59yE9MviWrekx2NX9SyZZEZmA/exec";
 
 
 /*
