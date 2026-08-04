@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Premium V2Ray Service - Fast, Secure and Reliable">
+    <meta name="theme-color" content="#07111f">
+
+    <title>V2RayX - Premium V2Ray Service</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <a href="#home" class="logo">
+            <span class="logo-icon">V</span>
+            <span>V2Ray<span class="green">X</span></span>
+        </a>
+
+        <nav class="desktop-nav">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#plans">Plans</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="nav-actions">
+
+            <button class="login-btn" onclick="openLogin()">
+                Login
+            </button>
+
+            <button class="nav-buy" onclick="scrollToPlans()">
+                Get Started
+            </button>
+
+        </div>
+
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            ☰
+        </button>
+
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+
+        <a href="#home" onclick="closeMobileMenu()">Home</a>
+        <a href="#features" onclick="closeMobileMenu()">Features</a>
+        <a href="#plans" onclick="closeMobileMenu()">Plans</a>
+        <a href="#how-it-works" onclick="closeMobileMenu()">How It Works</a>
+        <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+
+        <button onclick="openLogin(); closeMobileMenu()">
+            Login
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-glow glow-one"></div>
+    <div class="hero-glow glow-two"></div>
+
+    <div class="container hero-grid">
+
+        <div class="hero-content">
+
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                All Systems Operational
+            </div>
+
+            <h1>
+                Fast.
+                <span>Secure.</span>
+                Reliable.
+            </h1>
+
+            <p>
+                Premium V2Ray service with reliable connectivity,
+                easy setup and flexible subscription plans.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="btn btn-primary" onclick="scrollToPlans()">
+                    View Plans
+                    <span>→</span>
+                </button>
+
+                <a href="#how-it-works" class="btn btn-outline">
+                    How It Works
+                </a>
+
+            </div>
+
+            <div class="hero-trust">
+
+                <div class="trust-item">
+                    <strong>24/7</strong>
+                    <span>Service</span>
+                </div>
+
+                <div class="trust-divider"></div>
+
+                <div class="trust-item">
+                    <strong>Fast</strong>
+                    <span>Connection</span>
+                </div>
+
+                <div class="trust-divider"></div>
+
+                <div class="trust-item">
+                    <strong>Secure</strong>
+                    <span>Network</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SERVER CARD -->
+
+        <div class="server-card">
+
+            <div class="server-card-top">
+
+                <div>
+                    <span class="small-label">SERVICE STATUS</span>
+                    <h3>Network Overview</h3>
+                </div>
+
+                <span class="online-pill">
+                    <span></span>
+                    ONLINE
+                </span>
+
+            </div>
+
+            <div class="server-main">
+
+                <div class="server-icon">
+                    ◈
+                </div>
+
+                <div>
+                    <strong>Premium Network</strong>
+                    <p>Secure connection infrastructure</p>
+                </div>
+
+            </div>
+
+            <div class="server-stat">
+
+                <div>
+                    <span>Connection</span>
+                    <strong>Excellent</strong>
+                </div>
+
+                <div>
+                    <span>Security</span>
+                    <strong>Encrypted</strong>
+                </div>
+
+            </div>
+
+            <div class="server-load">
+
+                <div class="load-heading">
+                    <span>Network Status</span>
+                    <strong>Stable</strong>
+                </div>
+
+                <div class="load-bar">
+                    <span></span>
+                </div>
+
+            </div>
+
+            <div class="server-footer">
+                <span>● Protected Network</span>
+                <span>V2Ray Service</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STATS ================= -->
+
+<section class="stats-section">
+
+    <div class="container stats-grid">
+
+        <div class="stat-box">
+            <strong>99.9%</strong>
+            <span>Target Uptime</span>
+        </div>
+
+        <div class="stat-box">
+            <strong>24/7</strong>
+            <span>Service Availability</span>
+        </div>
+
+        <div class="stat-box">
+            <strong>Fast</strong>
+            <span>Activation</span>
+        </div>
+
+        <div class="stat-box">
+            <strong>Secure</strong>
+            <span>Connection</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="section" id="features">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">FEATURES</span>
+
+            <h2>
+                Everything You Need
+            </h2>
+
+            <p>
+                A simple and reliable service designed
+                for an easy customer experience.
+            </p>
+
+        </div>
+
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">⚡</div>
+
+                <h3>Fast Connection</h3>
+
+                <p>
+                    Reliable network connectivity designed
+                    for a smooth online experience.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🔐</div>
+
+                <h3>Secure Network</h3>
+
+                <p>
+                    Modern encrypted connection technology
+                    for your network traffic.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">📱</div>
+
+                <h3>Easy Setup</h3>
+
+                <p>
+                    Simple configuration process with
+                    QR and configuration support.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🌐</div>
+
+                <h3>Multi Platform</h3>
+
+                <p>
+                    Use compatible clients across supported
+                    desktop and mobile devices.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🛠</div>
+
+                <h3>Customer Support</h3>
+
+                <p>
+                    Get assistance whenever you need
+                    help with your service.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">📊</div>
+
+                <h3>Easy Management</h3>
+
+                <p>
+                    Manage your orders and subscriptions
+                    from your customer account.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PLANS ================= -->
+
+<section class="section plans-section" id="plans">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">PRICING</span>
+
+            <h2>
+                Choose Your Plan
+            </h2>
+
+            <p>
+                Select a subscription that works for you.
+            </p>
+
+        </div>
+
+
+        <div class="plans-grid">
+
+
+            <!-- STARTER -->
+
+            <div class="plan-card">
+
+                <div class="plan-name">
+                    Starter
+                </div>
+
+                <h3>
+                    Rs. 500
+                    <small>/ 30 Days</small>
+                </h3>
+
+                <p class="plan-description">
+                    Perfect for short-term users.
+                </p>
+
+                <div class="plan-divider"></div>
+
+                <ul>
+
+                    <li>✓ 30 Days Validity</li>
+                    <li>✓ VLESS Configuration</li>
+                    <li>✓ QR Code Support</li>
+                    <li>✓ Customer Support</li>
+
+                </ul>
+
+                <button
+                    class="plan-btn outline-btn"
+                    onclick="openOrder('Starter','30 Days','500')">
+
+                    Buy Starter
+
+                </button>
+
+            </div>
+
+
+            <!-- STANDARD -->
+
+            <div class="plan-card popular-plan">
+
+                <div class="popular-label">
+                    MOST POPULAR
+                </div>
+
+                <div class="plan-name">
+                    Standard
+                </div>
+
+                <h3>
+                    Rs. 900
+                    <small>/ 60 Days</small>
+                </h3>
+
+                <p class="plan-description">
+                    Best value for regular users.
+                </p>
+
+                <div class="plan-divider"></div>
+
+                <ul>
+
+                    <li>✓ 60 Days Validity</li>
+                    <li>✓ VLESS Configuration</li>
+                    <li>✓ QR Code Support</li>
+                    <li>✓ Customer Support</li>
+
+                </ul>
+
+                <button
+                    class="plan-btn primary-btn"
+                    onclick="openOrder('Standard','60 Days','900')">
+
+                    Buy Standard
+
+                </button>
+
+            </div>
+
+
+            <!-- PREMIUM -->
+
+            <div class="plan-card">
+
+                <div class="plan-name">
+                    Premium
+                </div>
+
+                <h3>
+                    Rs. 1200
+                    <small>/ 90 Days</small>
+                </h3>
+
+                <p class="plan-description">
+                    Best for long-term users.
+                </p>
+
+                <div class="plan-divider"></div>
+
+                <ul>
+
+                    <li>✓ 90 Days Validity</li>
+                    <li>✓ VLESS Configuration</li>
+                    <li>✓ QR Code Support</li>
+                    <li>✓ Customer Support</li>
+
+                </ul>
+
+                <button
+                    class="plan-btn outline-btn"
+                    onclick="openOrder('Premium','90 Days','1200')">
+
+                    Buy Premium
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="section" id="how-it-works">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">PROCESS</span>
+
+            <h2>
+                How It Works
+            </h2>
+
+            <p>
+                Getting your service is simple.
+            </p>
+
+        </div>
+
+
+        <div class="steps-grid">
+
+            <div class="step-card">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <h3>
+                    Choose a Plan
+                </h3>
+
+                <p>
+                    Select your preferred subscription package.
+                </p>
+
+            </div>
+
+
+            <div class="step-card">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <h3>
+                    Create Order
+                </h3>
+
+                <p>
+                    Enter your account and order details.
+                </p>
+
+            </div>
+
+
+            <div class="step-card">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <h3>
+                    Make Payment
+                </h3>
+
+                <p>
+                    Complete the available payment process.
+                </p>
+
+            </div>
+
+
+            <div class="step-card">
+
+                <div class="step-number">
+                    04
+                </div>
+
+                <h3>
+                    Get Configuration
+                </h3>
+
+                <p>
+                    Receive your configuration after verification.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ACCOUNT CTA ================= -->
+
+<section class="account-section">
+
+    <div class="container">
+
+        <div class="account-box">
+
+            <div>
+
+                <span class="section-tag">
+                    CUSTOMER AREA
+                </span>
+
+                <h2>
+                    Manage Your Service
+                </h2>
+
+                <p>
+                    Login to view your orders, payment status,
+                    subscription information and configuration.
+                </p>
+
+            </div>
+
+            <button
+                class="btn btn-primary"
+                onclick="openLogin()">
+
+                Login to Account →
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FAQ ================= -->
+
+<section class="section" id="faq">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">FAQ</span>
+
+            <h2>
+                Frequently Asked Questions
+            </h2>
+
+        </div>
+
+
+        <div class="faq-container">
+
+            <details>
+
+                <summary>
+                    What is V2Ray?
+                    <span>+</span>
+                </summary>
+
+                <p>
+                    V2Ray is a network proxy platform that supports
+                    different protocols and transport methods.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    How do I receive my configuration?
+                    <span>+</span>
+                </summary>
+
+                <p>
+                    After payment verification, your configuration
+                    can be delivered through your customer account
+                    or the configured delivery method.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    Which devices can I use?
+                    <span>+</span>
+                </summary>
+
+                <p>
+                    Compatible clients can be used on supported
+                    mobile and desktop platforms.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    How long does activation take?
+                    <span>+</span>
+                </summary>
+
+                <p>
+                    Activation depends on payment verification
+                    and service processing.
+                </p>
+
+            </details>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="container footer-grid">
+
+        <div class="footer-brand">
+
+            <a href="#home" class="logo">
+
+                <span class="logo-icon">
+                    V
+                </span>
+
+                <span>
+                    V2Ray<span class="green">X</span>
+                </span>
+
+            </a>
+
+            <p>
+                Premium V2Ray service platform with
+                simple ordering and customer management.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Navigation</h4>
+
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#plans">Plans</a>
+            <a href="#faq">FAQ</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Support</h4>
+
+            <a href="#" onclick="openWhatsApp()">
+                WhatsApp
+            </a>
+
+            <a href="#">
+                Telegram
+            </a>
+
+            <a href="#">
+                Contact Us
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="container copyright">
+
+        © <span id="year"></span>
+        V2RayX. All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+<!-- ==================================================
+     ORDER MODAL
+================================================== -->
+
+<div class="modal" id="orderModal">
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeOrder()">
+
+            ×
+
+        </button>
+
+
+        <div id="orderFormArea">
+
+            <div class="modal-heading">
+
+                <span class="section-tag">
+                    NEW ORDER
+                </span>
+
+                <h2>
+                    Complete Your Order
+                </h2>
+
+                <p>
+                    Enter your details below.
+                </p>
+
+            </div>
+
+
+            <div class="order-summary">
+
+                <div>
+                    <span>Package</span>
+                    <strong id="orderPlan">-</strong>
+                </div>
+
+                <div>
+                    <span>Duration</span>
+                    <strong id="orderDuration">-</strong>
+                </div>
+
+                <div>
+                    <span>Total</span>
+                    <strong id="orderPrice">-</strong>
+                </div>
+
+            </div>
+
+
+            <form id="orderForm">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+
+                <label>
+                    WhatsApp Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="customerPhone"
+                    placeholder="07XXXXXXXX"
+                    required
+                >
+
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="customerEmail"
+                    placeholder="you@example.com"
+                    required
+                >
+
+
+                <label>
+                    Payment Method
+                </label>
+
+                <select
+                    id="paymentMethod"
+                    required>
+
+                    <option value="">
+                        Select Payment Method
+                    </option>
+
+                    <option value="Bank Transfer">
+                        Bank Transfer
+                    </option>
+
+                    <option value="Cash Deposit">
+                        Cash Deposit
+                    </option>
+
+                </select>
+
+
+                <button
+                    type="submit"
+                    class="modal-submit">
+
+                    Continue to Payment →
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- SUCCESS -->
+
+        <div
+            class="order-success"
+            id="orderSuccess">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>
+                Order Created
+            </h2>
+
+            <p>
+                Your order has been created successfully.
+            </p>
+
+            <div class="generated-order">
+
+                <span>Order ID</span>
+
+                <strong id="generatedOrderId">
+                    V2-00000
+                </strong>
+
+            </div>
+
+            <p class="success-note">
+                Save your Order ID. You will need it
+                to check your order status.
+            </p>
+
+            <button
+                class="modal-submit"
+                onclick="closeOrder()">
+
+                Done
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     LOGIN MODAL
+================================================== -->
+
+<div class="modal" id="loginModal">
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeLogin()">
+
+            ×
+
+        </button>
+
+
+        <div class="modal-heading">
+
+            <span class="section-tag">
+                CUSTOMER AREA
+            </span>
+
+            <h2>
+                Login
+            </h2>
+
+            <p>
+                Access your customer account.
+            </p>
+
+        </div>
+
+
+        <form id="loginForm">
+
+            <label>
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="you@example.com"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Your password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="modal-submit">
+
+                Login
+
+            </button>
+
+        </form>
+
+
+        <div class="modal-bottom">
+
+            Don't have an account?
+
+            <button onclick="openRegister()">
+                Create Account
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     REGISTER MODAL
+================================================== -->
+
+<div class="modal" id="registerModal">
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeRegister()">
+
+            ×
+
+        </button>
+
+
+        <div class="modal-heading">
+
+            <span class="section-tag">
+                CUSTOMER AREA
+            </span>
+
+            <h2>
+                Create Account
+            </h2>
+
+            <p>
+                Register to manage your orders.
+            </p>
+
+        </div>
+
+
+        <form id="registerForm">
+
+            <label>
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Your full name"
+                required
+            >
+
+
+            <label>
+                WhatsApp Number
+            </label>
+
+            <input
+                type="tel"
+                id="registerPhone"
+                placeholder="07XXXXXXXX"
+                required
+            >
+
+
+            <label>
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="you@example.com"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Create a password"
+                minlength="6"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="modal-submit">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+
+        <div class="modal-bottom">
+
+            Already have an account?
+
+            <button onclick="openLoginFromRegister()">
+                Login
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
