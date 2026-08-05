@@ -1,65 +1,155 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Premium V2Ray Service - Fast, Secure and Reliable">
-    <meta name="theme-color" content="#07111f">
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Premium V2Ray Service - Fast, Secure and Reliable"
+    >
+
+    <meta
+        name="theme-color"
+        content="#07111f"
+    >
 
     <title>V2RayX - Premium V2Ray Service</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
+
+<!-- ==================================================
+     NAVBAR
+================================================== -->
 
 <header class="navbar">
 
     <div class="container nav-container">
 
         <a href="#home" class="logo">
-            <span class="logo-icon">V</span>
-            <span>V2Ray<span class="green">X</span></span>
+
+            <span class="logo-icon">
+                V
+            </span>
+
+            <span>
+                V2Ray<span class="green">X</span>
+            </span>
+
         </a>
 
+
         <nav class="desktop-nav">
-            <a href="#home">Home</a>
-            <a href="#features">Features</a>
-            <a href="#plans">Plans</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#faq">FAQ</a>
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#plans">
+                Plans
+            </a>
+
+            <a href="#how-it-works">
+                How It Works
+            </a>
+
+            <a href="#faq">
+                FAQ
+            </a>
+
         </nav>
+
 
         <div class="nav-actions">
 
-            <button class="login-btn" onclick="openLogin()">
+            <button
+                class="login-btn"
+                onclick="openLogin()"
+            >
                 Login
             </button>
 
-            <button class="nav-buy" onclick="scrollToPlans()">
+            <button
+                class="nav-buy"
+                onclick="scrollToPlans()"
+            >
                 Get Started
             </button>
 
         </div>
 
-        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+
+        <button
+            class="mobile-menu-btn"
+            onclick="toggleMobileMenu()"
+        >
             ☰
         </button>
 
     </div>
 
-    <div class="mobile-menu" id="mobileMenu">
 
-        <a href="#home" onclick="closeMobileMenu()">Home</a>
-        <a href="#features" onclick="closeMobileMenu()">Features</a>
-        <a href="#plans" onclick="closeMobileMenu()">Plans</a>
-        <a href="#how-it-works" onclick="closeMobileMenu()">How It Works</a>
-        <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+    <div
+        class="mobile-menu"
+        id="mobileMenu"
+    >
 
-        <button onclick="openLogin(); closeMobileMenu()">
+        <a
+            href="#home"
+            onclick="closeMobileMenu()"
+        >
+            Home
+        </a>
+
+        <a
+            href="#features"
+            onclick="closeMobileMenu()"
+        >
+            Features
+        </a>
+
+        <a
+            href="#plans"
+            onclick="closeMobileMenu()"
+        >
+            Plans
+        </a>
+
+        <a
+            href="#how-it-works"
+            onclick="closeMobileMenu()"
+        >
+            How It Works
+        </a>
+
+        <a
+            href="#faq"
+            onclick="closeMobileMenu()"
+        >
+            FAQ
+        </a>
+
+        <button
+            onclick="openLogin(); closeMobileMenu()"
+        >
             Login
         </button>
 
@@ -68,70 +158,129 @@
 </header>
 
 
-<!-- ================= HERO ================= -->
 
-<section class="hero" id="home">
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<section
+    class="hero"
+    id="home"
+>
 
     <div class="hero-glow glow-one"></div>
+
     <div class="hero-glow glow-two"></div>
+
 
     <div class="container hero-grid">
 
         <div class="hero-content">
 
             <div class="status-badge">
+
                 <span class="status-dot"></span>
+
                 All Systems Operational
+
             </div>
 
+
             <h1>
+
                 Fast.
                 <span>Secure.</span>
                 Reliable.
+
             </h1>
 
+
             <p>
+
                 Premium V2Ray service with reliable connectivity,
                 easy setup and flexible subscription plans.
+
             </p>
+
 
             <div class="hero-buttons">
 
-                <button class="btn btn-primary" onclick="scrollToPlans()">
+                <button
+                    class="btn btn-primary"
+                    onclick="scrollToPlans()"
+                >
+
                     View Plans
-                    <span>→</span>
+
+                    <span>
+                        →
+                    </span>
+
                 </button>
 
-                <a href="#how-it-works" class="btn btn-outline">
+
+                <a
+                    href="#how-it-works"
+                    class="btn btn-outline"
+                >
+
                     How It Works
+
                 </a>
 
             </div>
 
+
             <div class="hero-trust">
 
                 <div class="trust-item">
-                    <strong>24/7</strong>
-                    <span>Service</span>
+
+                    <strong>
+                        24/7
+                    </strong>
+
+                    <span>
+                        Service
+                    </span>
+
                 </div>
+
 
                 <div class="trust-divider"></div>
 
+
                 <div class="trust-item">
-                    <strong>Fast</strong>
-                    <span>Connection</span>
+
+                    <strong>
+                        Fast
+                    </strong>
+
+                    <span>
+                        Connection
+                    </span>
+
                 </div>
+
 
                 <div class="trust-divider"></div>
 
+
                 <div class="trust-item">
-                    <strong>Secure</strong>
-                    <span>Network</span>
+
+                    <strong>
+                        Secure
+                    </strong>
+
+                    <span>
+                        Network
+                    </span>
+
                 </div>
 
             </div>
 
         </div>
+
 
 
         <!-- SERVER CARD -->
@@ -141,16 +290,28 @@
             <div class="server-card-top">
 
                 <div>
-                    <span class="small-label">SERVICE STATUS</span>
-                    <h3>Network Overview</h3>
+
+                    <span class="small-label">
+                        SERVICE STATUS
+                    </span>
+
+                    <h3>
+                        Network Overview
+                    </h3>
+
                 </div>
 
+
                 <span class="online-pill">
+
                     <span></span>
+
                     ONLINE
+
                 </span>
 
             </div>
+
 
             <div class="server-main">
 
@@ -158,43 +319,86 @@
                     ◈
                 </div>
 
+
                 <div>
-                    <strong>Premium Network</strong>
-                    <p>Secure connection infrastructure</p>
+
+                    <strong>
+                        Premium Network
+                    </strong>
+
+                    <p>
+                        Secure connection infrastructure
+                    </p>
+
                 </div>
 
             </div>
+
 
             <div class="server-stat">
 
                 <div>
-                    <span>Connection</span>
-                    <strong>Excellent</strong>
+
+                    <span>
+                        Connection
+                    </span>
+
+                    <strong>
+                        Excellent
+                    </strong>
+
                 </div>
 
+
                 <div>
-                    <span>Security</span>
-                    <strong>Encrypted</strong>
+
+                    <span>
+                        Security
+                    </span>
+
+                    <strong>
+                        Encrypted
+                    </strong>
+
                 </div>
 
             </div>
+
 
             <div class="server-load">
 
                 <div class="load-heading">
-                    <span>Network Status</span>
-                    <strong>Stable</strong>
+
+                    <span>
+                        Network Status
+                    </span>
+
+                    <strong>
+                        Stable
+                    </strong>
+
                 </div>
 
+
                 <div class="load-bar">
+
                     <span></span>
+
                 </div>
 
             </div>
 
+
             <div class="server-footer">
-                <span>● Protected Network</span>
-                <span>V2Ray Service</span>
+
+                <span>
+                    ● Protected Network
+                </span>
+
+                <span>
+                    V2Ray Service
+                </span>
+
             </div>
 
         </div>
@@ -204,30 +408,64 @@
 </section>
 
 
-<!-- ================= STATS ================= -->
+
+<!-- ==================================================
+     STATS
+================================================== -->
 
 <section class="stats-section">
 
     <div class="container stats-grid">
 
         <div class="stat-box">
-            <strong>99.9%</strong>
-            <span>Target Uptime</span>
+
+            <strong>
+                99.9%
+            </strong>
+
+            <span>
+                Target Uptime
+            </span>
+
         </div>
 
-        <div class="stat-box">
-            <strong>24/7</strong>
-            <span>Service Availability</span>
-        </div>
 
         <div class="stat-box">
-            <strong>Fast</strong>
-            <span>Activation</span>
+
+            <strong>
+                24/7
+            </strong>
+
+            <span>
+                Service Availability
+            </span>
+
         </div>
 
+
         <div class="stat-box">
-            <strong>Secure</strong>
-            <span>Connection</span>
+
+            <strong>
+                Fast
+            </strong>
+
+            <span>
+                Activation
+            </span>
+
+        </div>
+
+
+        <div class="stat-box">
+
+            <strong>
+                Secure
+            </strong>
+
+            <span>
+                Connection
+            </span>
+
         </div>
 
     </div>
@@ -235,15 +473,23 @@
 </section>
 
 
-<!-- ================= FEATURES ================= -->
 
-<section class="section" id="features">
+<!-- ==================================================
+     FEATURES
+================================================== -->
+
+<section
+    class="section"
+    id="features"
+>
 
     <div class="container">
 
         <div class="section-heading">
 
-            <span class="section-tag">FEATURES</span>
+            <span class="section-tag">
+                FEATURES
+            </span>
 
             <h2>
                 Everything You Need
@@ -261,9 +507,13 @@
 
             <div class="feature-card">
 
-                <div class="feature-icon">⚡</div>
+                <div class="feature-icon">
+                    ⚡
+                </div>
 
-                <h3>Fast Connection</h3>
+                <h3>
+                    Fast Connection
+                </h3>
 
                 <p>
                     Reliable network connectivity designed
@@ -275,9 +525,13 @@
 
             <div class="feature-card">
 
-                <div class="feature-icon">🔐</div>
+                <div class="feature-icon">
+                    🔐
+                </div>
 
-                <h3>Secure Network</h3>
+                <h3>
+                    Secure Network
+                </h3>
 
                 <p>
                     Modern encrypted connection technology
@@ -289,9 +543,13 @@
 
             <div class="feature-card">
 
-                <div class="feature-icon">📱</div>
+                <div class="feature-icon">
+                    📱
+                </div>
 
-                <h3>Easy Setup</h3>
+                <h3>
+                    Easy Setup
+                </h3>
 
                 <p>
                     Simple configuration process with
@@ -303,9 +561,13 @@
 
             <div class="feature-card">
 
-                <div class="feature-icon">🌐</div>
+                <div class="feature-icon">
+                    🌐
+                </div>
 
-                <h3>Multi Platform</h3>
+                <h3>
+                    Multi Platform
+                </h3>
 
                 <p>
                     Use compatible clients across supported
@@ -317,9 +579,13 @@
 
             <div class="feature-card">
 
-                <div class="feature-icon">🛠</div>
+                <div class="feature-icon">
+                    🛠
+                </div>
 
-                <h3>Customer Support</h3>
+                <h3>
+                    Customer Support
+                </h3>
 
                 <p>
                     Get assistance whenever you need
@@ -331,9 +597,13 @@
 
             <div class="feature-card">
 
-                <div class="feature-icon">📊</div>
+                <div class="feature-icon">
+                    📊
+                </div>
 
-                <h3>Easy Management</h3>
+                <h3>
+                    Easy Management
+                </h3>
 
                 <p>
                     Manage your orders and subscriptions
@@ -349,15 +619,23 @@
 </section>
 
 
-<!-- ================= PLANS ================= -->
 
-<section class="section plans-section" id="plans">
+<!-- ==================================================
+     PLANS
+================================================== -->
+
+<section
+    class="section plans-section"
+    id="plans"
+>
 
     <div class="container">
 
         <div class="section-heading">
 
-            <span class="section-tag">PRICING</span>
+            <span class="section-tag">
+                PRICING
+            </span>
 
             <h2>
                 Choose Your Plan
@@ -382,34 +660,60 @@
                 </div>
 
                 <h3>
+
                     Rs. 500
-                    <small>/ 30 Days</small>
+
+                    <small>
+                        / 30 Days
+                    </small>
+
                 </h3>
+
 
                 <p class="plan-description">
                     Perfect for short-term users.
                 </p>
 
+
                 <div class="plan-divider"></div>
+
 
                 <ul>
 
-                    <li>✓ 30 Days Validity</li>
-                    <li>✓ VLESS Configuration</li>
-                    <li>✓ QR Code Support</li>
-                    <li>✓ Customer Support</li>
+                    <li>
+                        ✓ 30 Days Validity
+                    </li>
+
+                    <li>
+                        ✓ VLESS Configuration
+                    </li>
+
+                    <li>
+                        ✓ QR Code Support
+                    </li>
+
+                    <li>
+                        ✓ Customer Support
+                    </li>
 
                 </ul>
 
+
                 <button
                     class="plan-btn outline-btn"
-                    onclick="openOrder('Starter','30 Days','500')">
+                    onclick="openOrder(
+                        'Starter',
+                        '30 Days',
+                        '500'
+                    )"
+                >
 
                     Buy Starter
 
                 </button>
 
             </div>
+
 
 
             <!-- STANDARD -->
@@ -420,39 +724,67 @@
                     MOST POPULAR
                 </div>
 
+
                 <div class="plan-name">
                     Standard
                 </div>
 
+
                 <h3>
+
                     Rs. 900
-                    <small>/ 60 Days</small>
+
+                    <small>
+                        / 60 Days
+                    </small>
+
                 </h3>
+
 
                 <p class="plan-description">
                     Best value for regular users.
                 </p>
 
+
                 <div class="plan-divider"></div>
+
 
                 <ul>
 
-                    <li>✓ 60 Days Validity</li>
-                    <li>✓ VLESS Configuration</li>
-                    <li>✓ QR Code Support</li>
-                    <li>✓ Customer Support</li>
+                    <li>
+                        ✓ 60 Days Validity
+                    </li>
+
+                    <li>
+                        ✓ VLESS Configuration
+                    </li>
+
+                    <li>
+                        ✓ QR Code Support
+                    </li>
+
+                    <li>
+                        ✓ Customer Support
+                    </li>
 
                 </ul>
 
+
                 <button
                     class="plan-btn primary-btn"
-                    onclick="openOrder('Standard','60 Days','900')">
+                    onclick="openOrder(
+                        'Standard',
+                        '60 Days',
+                        '900'
+                    )"
+                >
 
                     Buy Standard
 
                 </button>
 
             </div>
+
 
 
             <!-- PREMIUM -->
@@ -463,36 +795,61 @@
                     Premium
                 </div>
 
+
                 <h3>
+
                     Rs. 1200
-                    <small>/ 90 Days</small>
+
+                    <small>
+                        / 90 Days
+                    </small>
+
                 </h3>
+
 
                 <p class="plan-description">
                     Best for long-term users.
                 </p>
 
+
                 <div class="plan-divider"></div>
+
 
                 <ul>
 
-                    <li>✓ 90 Days Validity</li>
-                    <li>✓ VLESS Configuration</li>
-                    <li>✓ QR Code Support</li>
-                    <li>✓ Customer Support</li>
+                    <li>
+                        ✓ 90 Days Validity
+                    </li>
+
+                    <li>
+                        ✓ VLESS Configuration
+                    </li>
+
+                    <li>
+                        ✓ QR Code Support
+                    </li>
+
+                    <li>
+                        ✓ Customer Support
+                    </li>
 
                 </ul>
 
+
                 <button
                     class="plan-btn outline-btn"
-                    onclick="openOrder('Premium','90 Days','1200')">
+                    onclick="openOrder(
+                        'Premium',
+                        '90 Days',
+                        '1200'
+                    )"
+                >
 
                     Buy Premium
 
                 </button>
 
             </div>
-
 
         </div>
 
@@ -501,15 +858,23 @@
 </section>
 
 
-<!-- ================= HOW IT WORKS ================= -->
 
-<section class="section" id="how-it-works">
+<!-- ==================================================
+     HOW IT WORKS
+================================================== -->
+
+<section
+    class="section"
+    id="how-it-works"
+>
 
     <div class="container">
 
         <div class="section-heading">
 
-            <span class="section-tag">PROCESS</span>
+            <span class="section-tag">
+                PROCESS
+            </span>
 
             <h2>
                 How It Works
@@ -598,7 +963,10 @@
 </section>
 
 
-<!-- ================= ACCOUNT CTA ================= -->
+
+<!-- ==================================================
+     ACCOUNT CTA
+================================================== -->
 
 <section class="account-section">
 
@@ -617,15 +985,20 @@
                 </h2>
 
                 <p>
-                    Login to view your orders, payment status,
-                    subscription information and configuration.
+
+                    Login to view your orders,
+                    payment status, subscription information
+                    and configuration.
+
                 </p>
 
             </div>
 
+
             <button
                 class="btn btn-primary"
-                onclick="openLogin()">
+                onclick="openLogin()"
+            >
 
                 Login to Account →
 
@@ -638,15 +1011,23 @@
 </section>
 
 
-<!-- ================= FAQ ================= -->
 
-<section class="section" id="faq">
+<!-- ==================================================
+     FAQ
+================================================== -->
+
+<section
+    class="section"
+    id="faq"
+>
 
     <div class="container">
 
         <div class="section-heading">
 
-            <span class="section-tag">FAQ</span>
+            <span class="section-tag">
+                FAQ
+            </span>
 
             <h2>
                 Frequently Asked Questions
@@ -657,62 +1038,95 @@
 
         <div class="faq-container">
 
+
             <details>
 
                 <summary>
+
                     What is V2Ray?
-                    <span>+</span>
+
+                    <span>
+                        +
+                    </span>
+
                 </summary>
 
                 <p>
-                    V2Ray is a network proxy platform that supports
-                    different protocols and transport methods.
+
+                    V2Ray is a network proxy platform
+                    that supports different protocols
+                    and transport methods.
+
                 </p>
 
             </details>
 
 
+
             <details>
 
                 <summary>
+
                     How do I receive my configuration?
-                    <span>+</span>
+
+                    <span>
+                        +
+                    </span>
+
                 </summary>
 
                 <p>
-                    After payment verification, your configuration
-                    can be delivered through your customer account
-                    or the configured delivery method.
+
+                    After payment verification,
+                    your configuration can be delivered
+                    through your customer account.
+
                 </p>
 
             </details>
 
 
+
             <details>
 
                 <summary>
+
                     Which devices can I use?
-                    <span>+</span>
+
+                    <span>
+                        +
+                    </span>
+
                 </summary>
 
                 <p>
-                    Compatible clients can be used on supported
-                    mobile and desktop platforms.
+
+                    Compatible clients can be used on
+                    supported mobile and desktop platforms.
+
                 </p>
 
             </details>
 
 
+
             <details>
 
                 <summary>
+
                     How long does activation take?
-                    <span>+</span>
+
+                    <span>
+                        +
+                    </span>
+
                 </summary>
 
                 <p>
+
                     Activation depends on payment verification
                     and service processing.
+
                 </p>
 
             </details>
@@ -724,15 +1138,22 @@
 </section>
 
 
-<!-- ================= FOOTER ================= -->
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
 
 <footer>
 
     <div class="container footer-grid">
 
+
         <div class="footer-brand">
 
-            <a href="#home" class="logo">
+            <a
+                href="#home"
+                class="logo"
+            >
 
                 <span class="logo-icon">
                     V
@@ -744,31 +1165,54 @@
 
             </a>
 
+
             <p>
+
                 Premium V2Ray service platform with
                 simple ordering and customer management.
+
             </p>
 
         </div>
 
 
+
         <div class="footer-column">
 
-            <h4>Navigation</h4>
+            <h4>
+                Navigation
+            </h4>
 
-            <a href="#home">Home</a>
-            <a href="#features">Features</a>
-            <a href="#plans">Plans</a>
-            <a href="#faq">FAQ</a>
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#plans">
+                Plans
+            </a>
+
+            <a href="#faq">
+                FAQ
+            </a>
 
         </div>
 
 
+
         <div class="footer-column">
 
-            <h4>Support</h4>
+            <h4>
+                Support
+            </h4>
 
-            <a href="#" onclick="openWhatsApp()">
+            <a
+                href="#"
+                onclick="openWhatsApp(); return false;"
+            >
                 WhatsApp
             </a>
 
@@ -787,32 +1231,41 @@
 
     <div class="container copyright">
 
-        © <span id="year"></span>
-        V2RayX. All Rights Reserved.
+        ©
+
+        <span id="year"></span>
+
+        V2RayX.
+        All Rights Reserved.
 
     </div>
 
 </footer>
 
 
+
 <!-- ==================================================
      ORDER MODAL
 ================================================== -->
 
-<div class="modal" id="orderModal">
+<div
+    class="modal"
+    id="orderModal"
+>
 
     <div class="modal-box">
 
+
         <button
             class="modal-close"
-            onclick="closeOrder()">
-
+            onclick="closeOrder()"
+        >
             ×
-
         </button>
 
 
         <div id="orderFormArea">
+
 
             <div class="modal-heading">
 
@@ -833,25 +1286,51 @@
 
             <div class="order-summary">
 
-                <div>
-                    <span>Package</span>
-                    <strong id="orderPlan">-</strong>
-                </div>
 
                 <div>
-                    <span>Duration</span>
-                    <strong id="orderDuration">-</strong>
+
+                    <span>
+                        Package
+                    </span>
+
+                    <strong id="orderPlan">
+                        -
+                    </strong>
+
                 </div>
 
+
                 <div>
-                    <span>Total</span>
-                    <strong id="orderPrice">-</strong>
+
+                    <span>
+                        Duration
+                    </span>
+
+                    <strong id="orderDuration">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="orderPrice">
+                        -
+                    </strong>
+
                 </div>
 
             </div>
 
 
+
             <form id="orderForm">
+
 
                 <label>
                     Full Name
@@ -895,7 +1374,8 @@
 
                 <select
                     id="paymentMethod"
-                    required>
+                    required
+                >
 
                     <option value="">
                         Select Payment Method
@@ -914,7 +1394,8 @@
 
                 <button
                     type="submit"
-                    class="modal-submit">
+                    class="modal-submit"
+                >
 
                     Continue to Payment →
 
@@ -925,27 +1406,34 @@
         </div>
 
 
-        <!-- SUCCESS -->
+
+        <!-- ORDER SUCCESS -->
 
         <div
             class="order-success"
-            id="orderSuccess">
+            id="orderSuccess"
+        >
 
             <div class="success-icon">
                 ✓
             </div>
 
+
             <h2>
                 Order Created
             </h2>
+
 
             <p>
                 Your order has been created successfully.
             </p>
 
+
             <div class="generated-order">
 
-                <span>Order ID</span>
+                <span>
+                    Order ID
+                </span>
 
                 <strong id="generatedOrderId">
                     V2-00000
@@ -953,14 +1441,19 @@
 
             </div>
 
+
             <p class="success-note">
-                Save your Order ID. You will need it
-                to check your order status.
+
+                Save your Order ID.
+                You will need it to check your order status.
+
             </p>
+
 
             <button
                 class="modal-submit"
-                onclick="closeOrder()">
+                onclick="closeOrder()"
+            >
 
                 Done
 
@@ -973,20 +1466,24 @@
 </div>
 
 
+
 <!-- ==================================================
      LOGIN MODAL
 ================================================== -->
 
-<div class="modal" id="loginModal">
+<div
+    class="modal"
+    id="loginModal"
+>
 
     <div class="modal-box">
 
+
         <button
             class="modal-close"
-            onclick="closeLogin()">
-
+            onclick="closeLogin()"
+        >
             ×
-
         </button>
 
 
@@ -1009,6 +1506,7 @@
 
         <form id="loginForm">
 
+
             <label>
                 Email Address
             </label>
@@ -1017,6 +1515,7 @@
                 type="email"
                 id="loginEmail"
                 placeholder="you@example.com"
+                autocomplete="email"
                 required
             >
 
@@ -1029,13 +1528,15 @@
                 type="password"
                 id="loginPassword"
                 placeholder="Your password"
+                autocomplete="current-password"
                 required
             >
 
 
             <button
                 type="submit"
-                class="modal-submit">
+                class="modal-submit"
+            >
 
                 Login
 
@@ -1048,8 +1549,13 @@
 
             Don't have an account?
 
-            <button onclick="openRegister()">
+            <button
+                type="button"
+                onclick="openRegister()"
+            >
+
                 Create Account
+
             </button>
 
         </div>
@@ -1059,20 +1565,24 @@
 </div>
 
 
+
 <!-- ==================================================
      REGISTER MODAL
 ================================================== -->
 
-<div class="modal" id="registerModal">
+<div
+    class="modal"
+    id="registerModal"
+>
 
     <div class="modal-box">
 
+
         <button
             class="modal-close"
-            onclick="closeRegister()">
-
+            onclick="closeRegister()"
+        >
             ×
-
         </button>
 
 
@@ -1095,6 +1605,9 @@
 
         <form id="registerForm">
 
+
+            <!-- NAME -->
+
             <label>
                 Full Name
             </label>
@@ -1103,9 +1616,13 @@
                 type="text"
                 id="registerName"
                 placeholder="Your full name"
+                autocomplete="name"
                 required
             >
 
+
+
+            <!-- PHONE -->
 
             <label>
                 WhatsApp Number
@@ -1115,9 +1632,13 @@
                 type="tel"
                 id="registerPhone"
                 placeholder="07XXXXXXXX"
+                autocomplete="tel"
                 required
             >
 
+
+
+            <!-- EMAIL -->
 
             <label>
                 Email Address
@@ -1127,9 +1648,13 @@
                 type="email"
                 id="registerEmail"
                 placeholder="you@example.com"
+                autocomplete="email"
                 required
             >
 
+
+
+            <!-- PASSWORD -->
 
             <label>
                 Password
@@ -1140,13 +1665,35 @@
                 id="registerPassword"
                 placeholder="Create a password"
                 minlength="6"
+                autocomplete="new-password"
                 required
             >
 
 
+
+            <!-- CONFIRM PASSWORD -->
+
+            <label>
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                id="registerConfirmPassword"
+                placeholder="Confirm your password"
+                minlength="6"
+                autocomplete="new-password"
+                required
+            >
+
+
+
+            <!-- SUBMIT -->
+
             <button
                 type="submit"
-                class="modal-submit">
+                class="modal-submit"
+            >
 
                 Create Account
 
@@ -1159,8 +1706,13 @@
 
             Already have an account?
 
-            <button onclick="openLoginFromRegister()">
+            <button
+                type="button"
+                onclick="openLoginFromRegister()"
+            >
+
                 Login
+
             </button>
 
         </div>
@@ -1170,7 +1722,29 @@
 </div>
 
 
+
+<!-- ==================================================
+     CUSTOMER DASHBOARD
+     
+     JavaScript will populate this
+     after successful login.
+================================================== -->
+
+<div
+    id="customerDashboard"
+    style="display:none;"
+>
+</div>
+
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
 <script src="script.js"></script>
+
 
 </body>
 </html>
+```
