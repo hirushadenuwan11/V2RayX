@@ -1,6 +1,8 @@
+```javascript
 /* =====================================================
    V2RayX CUSTOMER PAGE JAVASCRIPT
-   GitHub Pages Fixed Version
+   FULL UPDATED VERSION
+   GitHub Pages + Google Apps Script
 ===================================================== */
 
 
@@ -9,7 +11,7 @@
 ===================================================== */
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbyQ29jT0MI7s2og8YqX9QDgkQrWwvSXvA7CXFYMtBxRotJT59oSQbzLRugnvdCZZy7Waw/exec";
+"https://script.google.com/macros/s/AKfycbwXTU2m4YgpT7qZn7MGUTOtxSDPFivZRs8fatNuJdFTPfryLuGdkT-r3xfcnGLONMWcWQ/exec";
 
 
 /* =====================================================
@@ -28,6 +30,13 @@ let currentOrder = {
     duration: "",
     price: ""
 };
+
+
+/* =====================================================
+   CURRENT CUSTOMER
+===================================================== */
+
+let currentCustomer = null;
 
 
 /* =====================================================
@@ -98,15 +107,20 @@ function scrollToPlans() {
 
     if (!plans) {
 
-        console.error("Plans section not found.");
+        console.error(
+            "Plans section not found."
+        );
 
         return;
 
     }
 
     plans.scrollIntoView({
+
         behavior: "smooth",
+
         block: "start"
+
     });
 
 }
@@ -122,27 +136,36 @@ function openOrder(
     price
 ) {
 
-    currentOrder.plan =
-        plan;
+    currentOrder = {
 
-    currentOrder.duration =
-        duration;
+        plan: plan,
 
-    currentOrder.price =
-        price;
+        duration: duration,
+
+        price: price
+
+    };
 
 
     const orderPlan =
-        document.getElementById("orderPlan");
+        document.getElementById(
+            "orderPlan"
+        );
 
     const orderDuration =
-        document.getElementById("orderDuration");
+        document.getElementById(
+            "orderDuration"
+        );
 
     const orderPrice =
-        document.getElementById("orderPrice");
+        document.getElementById(
+            "orderPrice"
+        );
 
     const orderModal =
-        document.getElementById("orderModal");
+        document.getElementById(
+            "orderModal"
+        );
 
 
     if (orderPlan) {
@@ -190,16 +213,24 @@ function openOrder(
 function closeOrder() {
 
     const orderModal =
-        document.getElementById("orderModal");
+        document.getElementById(
+            "orderModal"
+        );
 
     const orderFormArea =
-        document.getElementById("orderFormArea");
+        document.getElementById(
+            "orderFormArea"
+        );
 
     const orderSuccess =
-        document.getElementById("orderSuccess");
+        document.getElementById(
+            "orderSuccess"
+        );
 
     const orderForm =
-        document.getElementById("orderForm");
+        document.getElementById(
+            "orderForm"
+        );
 
 
     if (orderModal) {
@@ -263,15 +294,32 @@ function generateOrderId() {
 function validatePhone(phone) {
 
     const cleaned =
-        phone.replace(/\s+/g, "");
+        String(phone)
+            .replace(/\s+/g, "")
+            .replace(/-/g, "");
 
-    return /^0[0-9]{9}$/.test(cleaned);
+
+    return /^0[0-9]{9}$/.test(
+        cleaned
+    );
 
 }
 
 
 /* =====================================================
-   SEND ORDER TO GOOGLE APPS SCRIPT
+   EMAIL VALIDATION
+===================================================== */
+
+function validateEmail(email) {
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        .test(email);
+
+}
+
+
+/* =====================================================
+   SEND ORDER TO GOOGLE SHEETS
 ===================================================== */
 
 function sendOrderToGoogleSheet(
@@ -280,10 +328,6 @@ function sendOrderToGoogleSheet(
 ) {
 
     if (!API_URL) {
-
-        console.error(
-            "Google Apps Script URL is empty."
-        );
 
         alert(
             "Backend URL is not configured."
@@ -294,19 +338,32 @@ function sendOrderToGoogleSheet(
     }
 
 
+    console.log(
+        "Sending order:",
+        orderData
+    );
+
+
     /*
-    Create hidden iframe
+    =================================================
+    CREATE HIDDEN IFRAME
+    =================================================
     */
 
     const iframe =
-        document.createElement("iframe");
+        document.createElement(
+            "iframe"
+        );
+
 
     iframe.name =
         "v2rayOrderFrame_" +
         Date.now();
 
+
     iframe.style.display =
         "none";
+
 
     document.body.appendChild(
         iframe
@@ -314,27 +371,37 @@ function sendOrderToGoogleSheet(
 
 
     /*
-    Create hidden form
+    =================================================
+    CREATE FORM
+    =================================================
     */
 
     const form =
-        document.createElement("form");
+        document.createElement(
+            "form"
+        );
+
 
     form.method =
         "POST";
 
+
     form.action =
         API_URL;
 
+
     form.target =
         iframe.name;
+
 
     form.style.display =
         "none";
 
 
     /*
-    Add input
+    =================================================
+    ADD FIELD
+    =================================================
     */
 
     function addField(
@@ -343,16 +410,25 @@ function sendOrderToGoogleSheet(
     ) {
 
         const input =
-            document.createElement("input");
+            document.createElement(
+                "input"
+            );
+
 
         input.type =
             "hidden";
 
+
         input.name =
             name;
 
+
         input.value =
-            value || "";
+            value !== undefined &&
+            value !== null
+                ? String(value)
+                : "";
+
 
         form.appendChild(
             input
@@ -362,7 +438,21 @@ function sendOrderToGoogleSheet(
 
 
     /*
-    Send order fields
+    =================================================
+    IMPORTANT ACTION
+    =================================================
+    */
+
+    addField(
+        "action",
+        "createOrder"
+    );
+
+
+    /*
+    =================================================
+    ORDER DATA
+    =================================================
     */
 
     addField(
@@ -370,55 +460,66 @@ function sendOrderToGoogleSheet(
         orderData.orderId
     );
 
+
     addField(
         "name",
         orderData.name
     );
+
 
     addField(
         "customerName",
         orderData.name
     );
 
+
     addField(
         "phone",
         orderData.phone
     );
+
 
     addField(
         "email",
         orderData.email
     );
 
+
     addField(
         "plan",
         orderData.plan
     );
+
 
     addField(
         "package",
         orderData.plan
     );
 
+
     addField(
         "duration",
         orderData.duration
     );
+
 
     addField(
         "price",
         orderData.price
     );
 
+
     addField(
         "payment",
         orderData.payment
     );
 
+
     addField(
         "paymentMethod",
         orderData.payment
     );
+
 
     addField(
         "createdAt",
@@ -426,18 +527,32 @@ function sendOrderToGoogleSheet(
     );
 
 
+    /*
+    =================================================
+    APPEND FORM
+    =================================================
+    */
+
     document.body.appendChild(
         form
     );
 
 
     /*
-    Submit
+    =================================================
+    SUBMIT
+    =================================================
     */
 
     try {
 
         form.submit();
+
+
+        console.log(
+            "Order submitted successfully."
+        );
+
 
     } catch (error) {
 
@@ -446,11 +561,14 @@ function sendOrderToGoogleSheet(
             error
         );
 
+
         alert(
             "Unable to send order."
         );
 
+
         form.remove();
+
         iframe.remove();
 
         return;
@@ -459,28 +577,35 @@ function sendOrderToGoogleSheet(
 
 
     /*
-    Google Apps Script response
-    is cross-origin, so we don't
-    read it directly.
-
+    =================================================
+    WAIT FOR GOOGLE APPS SCRIPT
+    =================================================
     */
 
-    setTimeout(function() {
+    setTimeout(
+        function() {
 
-        if (callback) {
+            if (callback) {
 
-            callback();
+                callback();
 
-        }
+            }
 
-        setTimeout(function() {
 
-            form.remove();
-            iframe.remove();
+            setTimeout(
+                function() {
 
-        }, 3000);
+                    form.remove();
 
-    }, 1500);
+                    iframe.remove();
+
+                },
+                3000
+            );
+
+        },
+        2000
+    );
 
 }
 
@@ -495,6 +620,7 @@ function setupOrderForm() {
         document.getElementById(
             "orderForm"
         );
+
 
     if (!orderForm) {
 
@@ -514,20 +640,29 @@ function setupOrderForm() {
             event.preventDefault();
 
 
+            /*
+            =========================================
+            GET INPUTS
+            =========================================
+            */
+
             const nameInput =
                 document.getElementById(
                     "customerName"
                 );
+
 
             const phoneInput =
                 document.getElementById(
                     "customerPhone"
                 );
 
+
             const emailInput =
                 document.getElementById(
                     "customerEmail"
                 );
+
 
             const paymentInput =
                 document.getElementById(
@@ -536,31 +671,40 @@ function setupOrderForm() {
 
 
             const name =
-                nameInput ?
-                nameInput.value.trim() :
-                "";
+                nameInput
+                    ? nameInput.value.trim()
+                    : "";
+
 
             const phone =
-                phoneInput ?
-                phoneInput.value.trim() :
-                "";
+                phoneInput
+                    ? phoneInput.value.trim()
+                    : "";
+
 
             const email =
-                emailInput ?
-                emailInput.value.trim() :
-                "";
+                emailInput
+                    ? emailInput.value
+                        .trim()
+                        .toLowerCase()
+                    : "";
+
 
             const payment =
-                paymentInput ?
-                paymentInput.value :
-                "";
+                paymentInput
+                    ? paymentInput.value
+                    : "";
 
 
-            /* =========================
-               VALIDATION
-            ========================= */
+            /*
+            =========================================
+            VALIDATION
+            =========================================
+            */
 
-            if (name.length < 2) {
+            if (
+                name.length < 2
+            ) {
 
                 alert(
                     "Please enter your full name."
@@ -571,7 +715,9 @@ function setupOrderForm() {
             }
 
 
-            if (!validatePhone(phone)) {
+            if (
+                !validatePhone(phone)
+            ) {
 
                 alert(
                     "Please enter a valid WhatsApp number."
@@ -582,10 +728,12 @@ function setupOrderForm() {
             }
 
 
-            if (!email) {
+            if (
+                !validateEmail(email)
+            ) {
 
                 alert(
-                    "Please enter your email address."
+                    "Please enter a valid email address."
                 );
 
                 return;
@@ -615,13 +763,21 @@ function setupOrderForm() {
             }
 
 
-            /* =========================
-               CREATE ORDER
-            ========================= */
+            /*
+            =========================================
+            CREATE ORDER ID
+            =========================================
+            */
 
             const orderId =
                 generateOrderId();
 
+
+            /*
+            =========================================
+            ORDER OBJECT
+            =========================================
+            */
 
             const orderData = {
 
@@ -655,17 +811,22 @@ function setupOrderForm() {
             };
 
 
-            /* =========================
-               LOCAL STORAGE
-            ========================= */
+            /*
+            =========================================
+            SAVE LOCAL
+            =========================================
+            */
 
             try {
 
                 localStorage.setItem(
+
                     "lastOrder",
+
                     JSON.stringify(
                         orderData
                     )
+
                 );
 
             } catch (error) {
@@ -677,9 +838,11 @@ function setupOrderForm() {
             }
 
 
-            /* =========================
-               BUTTON
-            ========================= */
+            /*
+            =========================================
+            BUTTON
+            =========================================
+            */
 
             const submitButton =
                 orderForm.querySelector(
@@ -692,19 +855,31 @@ function setupOrderForm() {
                 submitButton.disabled =
                     true;
 
+
                 submitButton.textContent =
                     "Creating Order...";
 
             }
 
 
-            /* =========================
-               SEND
-            ========================= */
+            /*
+            =========================================
+            SEND
+            =========================================
+            */
 
             sendOrderToGoogleSheet(
+
                 orderData,
+
                 function() {
+
+
+                    /*
+                    ================================
+                    SHOW SUCCESS
+                    ================================
+                    */
 
                     showOrderSuccess(
                         orderId
@@ -716,12 +891,14 @@ function setupOrderForm() {
                         submitButton.disabled =
                             false;
 
+
                         submitButton.textContent =
                             "Continue to Payment →";
 
                     }
 
                 }
+
             );
 
         }
@@ -743,10 +920,12 @@ function showOrderSuccess(
             "orderFormArea"
         );
 
+
     const orderSuccess =
         document.getElementById(
             "orderSuccess"
         );
+
 
     const generatedOrderId =
         document.getElementById(
@@ -781,7 +960,7 @@ function showOrderSuccess(
 
 
 /* =====================================================
-   LOGIN
+   LOGIN MODAL
 ===================================================== */
 
 function openLogin() {
@@ -791,10 +970,13 @@ function openLogin() {
             "loginModal"
         );
 
+
     if (!loginModal) return;
+
 
     loginModal.style.display =
         "block";
+
 
     document.body.style.overflow =
         "hidden";
@@ -809,12 +991,14 @@ function closeLogin() {
             "loginModal"
         );
 
+
     if (loginModal) {
 
         loginModal.style.display =
             "none";
 
     }
+
 
     document.body.style.overflow =
         "";
@@ -823,7 +1007,7 @@ function closeLogin() {
 
 
 /* =====================================================
-   REGISTER
+   REGISTER MODAL
 ===================================================== */
 
 function openRegister() {
@@ -836,11 +1020,13 @@ function openRegister() {
             "registerModal"
         );
 
+
     if (!registerModal) return;
 
 
     registerModal.style.display =
         "block";
+
 
     document.body.style.overflow =
         "hidden";
@@ -855,12 +1041,14 @@ function closeRegister() {
             "registerModal"
         );
 
+
     if (registerModal) {
 
         registerModal.style.display =
             "none";
 
     }
+
 
     document.body.style.overflow =
         "";
@@ -878,36 +1066,6 @@ function openLoginFromRegister() {
 
 
 /* =====================================================
-   LOGIN FORM
-===================================================== */
-
-function setupLoginForm() {
-
-    const loginForm =
-        document.getElementById(
-            "loginForm"
-        );
-
-    if (!loginForm) return;
-
-
-    loginForm.addEventListener(
-        "submit",
-        function(event) {
-
-            event.preventDefault();
-
-            alert(
-                "Login backend is not connected yet."
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
    REGISTER FORM
 ===================================================== */
 
@@ -918,6 +1076,7 @@ function setupRegisterForm() {
             "registerForm"
         );
 
+
     if (!registerForm) return;
 
 
@@ -927,8 +1086,587 @@ function setupRegisterForm() {
 
             event.preventDefault();
 
-            alert(
-                "Registration backend is not connected yet."
+
+            const name =
+                document.getElementById(
+                    "registerName"
+                )
+                    ?.value
+                    .trim() || "";
+
+
+            const phone =
+                document.getElementById(
+                    "registerPhone"
+                )
+                    ?.value
+                    .trim() || "";
+
+
+            const email =
+                document.getElementById(
+                    "registerEmail"
+                )
+                    ?.value
+                    .trim()
+                    .toLowerCase() || "";
+
+
+            const password =
+                document.getElementById(
+                    "registerPassword"
+                )
+                    ?.value || "";
+
+
+            /*
+            =========================================
+            VALIDATION
+            =========================================
+            */
+
+            if (
+                name.length < 2
+            ) {
+
+                alert(
+                    "Please enter your full name."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !validatePhone(phone)
+            ) {
+
+                alert(
+                    "Please enter a valid WhatsApp number."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !validateEmail(email)
+            ) {
+
+                alert(
+                    "Please enter a valid email address."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                password.length < 6
+            ) {
+
+                alert(
+                    "Password must contain at least 6 characters."
+                );
+
+                return;
+
+            }
+
+
+            /*
+            =========================================
+            BUTTON
+            =========================================
+            */
+
+            const button =
+                registerForm.querySelector(
+                    ".modal-submit"
+                );
+
+
+            if (button) {
+
+                button.disabled =
+                    true;
+
+                button.textContent =
+                    "Creating Account...";
+
+            }
+
+
+            /*
+            =========================================
+            SEND REGISTER REQUEST
+            =========================================
+            */
+
+            sendRegisterRequest(
+
+                {
+
+                    name:
+                        name,
+
+                    phone:
+                        phone,
+
+                    email:
+                        email,
+
+                    password:
+                        password
+
+                },
+
+                function(success, message) {
+
+
+                    if (button) {
+
+                        button.disabled =
+                            false;
+
+                        button.textContent =
+                            "Create Account";
+
+                    }
+
+
+                    if (success) {
+
+                        alert(
+                            "Account created successfully. You can now login."
+                        );
+
+
+                        registerForm.reset();
+
+
+                        closeRegister();
+
+
+                        openLogin();
+
+                    } else {
+
+                        alert(
+                            message ||
+                            "Registration failed."
+                        );
+
+                    }
+
+                }
+
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SEND REGISTER REQUEST
+===================================================== */
+
+function sendRegisterRequest(
+    data,
+    callback
+) {
+
+    /*
+    NOTE:
+    Google Apps Script CORS can block
+    normal fetch requests.
+
+    Therefore we use hidden iframe
+    + POST form.
+    */
+
+    const iframe =
+        document.createElement(
+            "iframe"
+        );
+
+
+    iframe.name =
+        "registerFrame_" +
+        Date.now();
+
+
+    iframe.style.display =
+        "none";
+
+
+    document.body.appendChild(
+        iframe
+    );
+
+
+    const form =
+        document.createElement(
+            "form"
+        );
+
+
+    form.method =
+        "POST";
+
+
+    form.action =
+        API_URL;
+
+
+    form.target =
+        iframe.name;
+
+
+    form.style.display =
+        "none";
+
+
+    function addField(
+        name,
+        value
+    ) {
+
+        const input =
+            document.createElement(
+                "input"
+            );
+
+
+        input.type =
+            "hidden";
+
+
+        input.name =
+            name;
+
+
+        input.value =
+            value || "";
+
+
+        form.appendChild(
+            input
+        );
+
+    }
+
+
+    addField(
+        "action",
+        "register"
+    );
+
+
+    addField(
+        "name",
+        data.name
+    );
+
+
+    addField(
+        "phone",
+        data.phone
+    );
+
+
+    addField(
+        "email",
+        data.email
+    );
+
+
+    addField(
+        "password",
+        data.password
+    );
+
+
+    document.body.appendChild(
+        form
+    );
+
+
+    try {
+
+        form.submit();
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        alert(
+            "Unable to connect to backend."
+        );
+
+
+        form.remove();
+
+        iframe.remove();
+
+        return;
+
+    }
+
+
+    /*
+    Since iframe response cannot be
+    safely read cross-origin,
+    report success after submission.
+    */
+
+    setTimeout(
+        function() {
+
+            if (callback) {
+
+                callback(
+                    true,
+                    "Registration submitted."
+                );
+
+            }
+
+
+            setTimeout(
+                function() {
+
+                    form.remove();
+
+                    iframe.remove();
+
+                },
+                3000
+            );
+
+        },
+        2000
+    );
+
+}
+
+
+/* =====================================================
+   LOGIN FORM
+===================================================== */
+
+function setupLoginForm() {
+
+    const loginForm =
+        document.getElementById(
+            "loginForm"
+        );
+
+
+    if (!loginForm) return;
+
+
+    loginForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document.getElementById(
+                    "loginEmail"
+                )
+                    ?.value
+                    .trim()
+                    .toLowerCase() || "";
+
+
+            const password =
+                document.getElementById(
+                    "loginPassword"
+                )
+                    ?.value || "";
+
+
+            if (
+                !validateEmail(email)
+            ) {
+
+                alert(
+                    "Please enter a valid email address."
+                );
+
+                return;
+
+            }
+
+
+            if (!password) {
+
+                alert(
+                    "Please enter your password."
+                );
+
+                return;
+
+            }
+
+
+            const button =
+                loginForm.querySelector(
+                    ".modal-submit"
+                );
+
+
+            if (button) {
+
+                button.disabled =
+                    true;
+
+                button.textContent =
+                    "Logging in...";
+
+            }
+
+
+            /*
+            =========================================
+            LOGIN
+            =========================================
+
+            Uses GET because Google Apps Script
+            doGet can return the JSON response.
+            =========================================
+            */
+
+            const url =
+                API_URL +
+                "?action=login" +
+                "&email=" +
+                encodeURIComponent(email) +
+                "&password=" +
+                encodeURIComponent(password);
+
+
+            fetch(url, {
+
+                method: "GET"
+
+            })
+
+            .then(
+                response =>
+                    response.json()
+            )
+
+            .then(
+                data => {
+
+                    if (button) {
+
+                        button.disabled =
+                            false;
+
+                        button.textContent =
+                            "Login";
+
+                    }
+
+
+                    if (
+                        data.success
+                    ) {
+
+                        currentCustomer =
+                            data.customer;
+
+
+                        /*
+                        SAVE SESSION
+                        */
+
+                        try {
+
+                            localStorage.setItem(
+
+                                "v2rayxCustomer",
+
+                                JSON.stringify(
+                                    data.customer
+                                )
+
+                            );
+
+                        } catch (error) {
+
+                            console.log(
+                                error
+                            );
+
+                        }
+
+
+                        closeLogin();
+
+
+                        alert(
+                            "Login successful!"
+                        );
+
+
+                        /*
+                        Go to customer area
+                        */
+
+                        window.location.href =
+                            "dashboard.html";
+
+                    } else {
+
+                        alert(
+                            data.message ||
+                            "Login failed."
+                        );
+
+                    }
+
+                }
+            )
+
+            .catch(
+                error => {
+
+                    console.error(
+                        "Login error:",
+                        error
+                    );
+
+
+                    if (button) {
+
+                        button.disabled =
+                            false;
+
+                        button.textContent =
+                            "Login";
+
+                    }
+
+
+                    alert(
+                        "Unable to connect to server."
+                    );
+
+                }
             );
 
         }
@@ -956,16 +1694,21 @@ function openWhatsApp() {
 
     const message =
         encodeURIComponent(
+
             "Hello, I need help with V2Ray service."
+
         );
 
 
     window.open(
+
         "https://wa.me/" +
         WHATSAPP_NUMBER +
         "?text=" +
         message,
+
         "_blank"
+
     );
 
 }
@@ -986,10 +1729,12 @@ function setupOutsideClick() {
                     "orderModal"
                 );
 
+
             const loginModal =
                 document.getElementById(
                     "loginModal"
                 );
+
 
             const registerModal =
                 document.getElementById(
@@ -999,7 +1744,8 @@ function setupOutsideClick() {
 
             if (
                 orderModal &&
-                event.target === orderModal
+                event.target ===
+                    orderModal
             ) {
 
                 closeOrder();
@@ -1009,7 +1755,8 @@ function setupOutsideClick() {
 
             if (
                 loginModal &&
-                event.target === loginModal
+                event.target ===
+                    loginModal
             ) {
 
                 closeLogin();
@@ -1019,7 +1766,8 @@ function setupOutsideClick() {
 
             if (
                 registerModal &&
-                event.target === registerModal
+                event.target ===
+                    registerModal
             ) {
 
                 closeRegister();
@@ -1043,7 +1791,8 @@ function setupEscapeKey() {
         function(event) {
 
             if (
-                event.key === "Escape"
+                event.key ===
+                "Escape"
             ) {
 
                 closeOrder();
@@ -1062,45 +1811,55 @@ function setupEscapeKey() {
 
 /* =====================================================
    MAKE FUNCTIONS GLOBAL
-   IMPORTANT FOR HTML onclick=""
+   FOR HTML onclick=""
 ===================================================== */
 
 window.toggleMobileMenu =
     toggleMobileMenu;
 
+
 window.closeMobileMenu =
     closeMobileMenu;
+
 
 window.scrollToPlans =
     scrollToPlans;
 
+
 window.openOrder =
     openOrder;
+
 
 window.closeOrder =
     closeOrder;
 
+
 window.openLogin =
     openLogin;
+
 
 window.closeLogin =
     closeLogin;
 
+
 window.openRegister =
     openRegister;
+
 
 window.closeRegister =
     closeRegister;
 
+
 window.openLoginFromRegister =
     openLoginFromRegister;
+
 
 window.openWhatsApp =
     openWhatsApp;
 
 
 /* =====================================================
-   START
+   PAGE START
 ===================================================== */
 
 document.addEventListener(
@@ -1108,21 +1867,43 @@ document.addEventListener(
     function() {
 
         console.log(
-            "V2RayX JavaScript Loaded Successfully"
+            "================================"
+        );
+
+
+        console.log(
+            "V2RayX JavaScript Loaded"
+        );
+
+
+        console.log(
+            "API:",
+            API_URL
+        );
+
+
+        console.log(
+            "================================"
         );
 
 
         setYear();
 
+
         setupOrderForm();
+
 
         setupLoginForm();
 
+
         setupRegisterForm();
 
+
         setupOutsideClick();
+
 
         setupEscapeKey();
 
     }
 );
+```
