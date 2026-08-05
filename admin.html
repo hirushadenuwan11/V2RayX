@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>V2RayX Admin Panel</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#0b1020;
+    color:#fff;
+}
+
+.header{
+    padding:20px 30px;
+    background:#11182d;
+    border-bottom:1px solid #26304a;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:700;
+}
+
+.logo span{
+    color:#00e5ff;
+}
+
+.refresh{
+    border:0;
+    padding:10px 16px;
+    border-radius:8px;
+    background:#00e5ff;
+    color:#001018;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    padding:25px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:#11182d;
+    border:1px solid #26304a;
+    padding:20px;
+    border-radius:14px;
+}
+
+.stat h3{
+    font-size:14px;
+    color:#9ca8c7;
+    margin-bottom:8px;
+}
+
+.stat strong{
+    font-size:28px;
+}
+
+.search-area{
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.search{
+    flex:1;
+    padding:14px;
+    background:#11182d;
+    border:1px solid #26304a;
+    border-radius:10px;
+    color:#fff;
+    outline:none;
+}
+
+.filter{
+    padding:14px;
+    background:#11182d;
+    color:#fff;
+    border:1px solid #26304a;
+    border-radius:10px;
+}
+
+.table-box{
+    background:#11182d;
+    border:1px solid #26304a;
+    border-radius:14px;
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1100px;
+}
+
+th,
+td{
+    padding:15px;
+    text-align:left;
+    border-bottom:1px solid #26304a;
+}
+
+th{
+    color:#8f9bb8;
+    font-size:13px;
+}
+
+td{
+    font-size:14px;
+}
+
+.status{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.Pending{
+    background:#4b3a12;
+    color:#ffd54a;
+}
+
+.Processing{
+    background:#123b55;
+    color:#50cfff;
+}
+
+.Paid{
+    background:#123d29;
+    color:#5dffad;
+}
+
+.Completed{
+    background:#193e24;
+    color:#7dff8d;
+}
+
+.Rejected{
+    background:#4a1c25;
+    color:#ff7183;
+}
+
+select.status-select{
+    padding:8px;
+    border-radius:7px;
+    background:#0b1020;
+    border:1px solid #34405f;
+    color:#fff;
+}
+
+.loading{
+    text-align:center;
+    padding:40px;
+    color:#9ca8c7;
+}
+
+.empty{
+    text-align:center;
+    padding:40px;
+    color:#9ca8c7;
+}
+
+@media(max-width:900px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .header{
+        padding:16px;
+    }
+
+    .container{
+        padding:15px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .refresh{
+        padding:8px 12px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        V2Ray<span>X</span> Admin
+    </div>
+
+    <button class="refresh" onclick="loadOrders()">
+        🔄 Refresh
+    </button>
+
+</header>
+
+
+<main class="container">
+
+    <!-- STATISTICS -->
+
+    <section class="stats">
+
+        <div class="stat">
+            <h3>Total Orders</h3>
+            <strong id="totalOrders">0</strong>
+        </div>
+
+        <div class="stat">
+            <h3>Pending</h3>
+            <strong id="pendingOrders">0</strong>
+        </div>
+
+        <div class="stat">
+            <h3>Processing</h3>
+            <strong id="processingOrders">0</strong>
+        </div>
+
+        <div class="stat">
+            <h3>Paid</h3>
+            <strong id="paidOrders">0</strong>
+        </div>
+
+        <div class="stat">
+            <h3>Completed</h3>
+            <strong id="completedOrders">0</strong>
+        </div>
+
+    </section>
+
+
+    <!-- SEARCH -->
+
+    <section class="search-area">
+
+        <input
+            type="text"
+            id="search"
+            class="search"
+            placeholder="🔎 Search Order ID, customer, phone..."
+            oninput="renderOrders()"
+        >
+
+        <select
+            id="filter"
+            class="filter"
+            onchange="renderOrders()"
+        >
+
+            <option value="All">All Orders</option>
+            <option value="Pending">Pending</option>
+            <option value="Processing">Processing</option>
+            <option value="Paid">Paid</option>
+            <option value="Completed">Completed</option>
+            <option value="Rejected">Rejected</option>
+
+        </select>
+
+    </section>
+
+
+    <!-- ORDERS TABLE -->
+
+    <section class="table-box">
+
+        <div id="loading" class="loading">
+            Loading orders...
+        </div>
+
+        <table id="ordersTable" style="display:none">
+
+            <thead>
+
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Phone</th>
+                    <th>Package</th>
+                    <th>Price</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="ordersBody"></tbody>
+
+        </table>
+
+        <div id="empty" class="empty" style="display:none">
+            No orders found.
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   GOOGLE APPS SCRIPT API
+===================================================== */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbz27h6wzHQpwaj2wYN0qljuQQjFz23W1jUz0XvD_9pjCugSNrn1lX6fT4xHeYYxPHGz/exec";
+
+
+/* =====================================================
+   DATA
+===================================================== */
+
+let orders = [];
+
+
+/* =====================================================
+   LOAD ORDERS
+===================================================== */
+
+async function loadOrders(){
+
+    const loading =
+        document.getElementById("loading");
+
+    const table =
+        document.getElementById("ordersTable");
+
+    loading.style.display = "block";
+    table.style.display = "none";
+
+    try{
+
+        const response =
+            await fetch(
+                API_URL + "?action=getOrders"
+            );
+
+        const data =
+            await response.json();
+
+        if(!data.success){
+
+            throw new Error(
+                "Unable to load orders"
+            );
+
+        }
+
+        orders = data.orders || [];
+
+        updateStats();
+
+        renderOrders();
+
+        loading.style.display = "none";
+        table.style.display = "table";
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        loading.innerHTML =
+            "❌ Failed to load orders.<br><br>" +
+            "Check your Google Apps Script URL.";
+
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE STATISTICS
+===================================================== */
+
+function updateStats(){
+
+    document.getElementById("totalOrders")
+        .textContent = orders.length;
+
+    document.getElementById("pendingOrders")
+        .textContent =
+        orders.filter(
+            o => o.status === "Pending"
+        ).length;
+
+    document.getElementById("processingOrders")
+        .textContent =
+        orders.filter(
+            o => o.status === "Processing"
+        ).length;
+
+    document.getElementById("paidOrders")
+        .textContent =
+        orders.filter(
+            o => o.status === "Paid"
+        ).length;
+
+    document.getElementById("completedOrders")
+        .textContent =
+        orders.filter(
+            o => o.status === "Completed"
+        ).length;
+
+}
+
+
+/* =====================================================
+   RENDER ORDERS
+===================================================== */
+
+function renderOrders(){
+
+    const body =
+        document.getElementById("ordersBody");
+
+    const search =
+        document.getElementById("search")
+            .value
+            .toLowerCase();
+
+    const filter =
+        document.getElementById("filter")
+            .value;
+
+    body.innerHTML = "";
+
+    const filtered =
+        orders.filter(order => {
+
+            const text =
+                (
+                    order.orderId +
+                    " " +
+                    order.customerName +
+                    " " +
+                    order.phone
+                ).toLowerCase();
+
+            const matchesSearch =
+                text.includes(search);
+
+            const matchesFilter =
+                filter === "All" ||
+                order.status === filter;
+
+            return (
+                matchesSearch &&
+                matchesFilter
+            );
+
+        });
+
+
+    if(filtered.length === 0){
+
+        document.getElementById("empty")
+            .style.display = "block";
+
+        return;
+
+    }
+
+
+    document.getElementById("empty")
+        .style.display = "none";
+
+
+    filtered.forEach(order => {
+
+        const row =
+            document.createElement("tr");
+
+
+        row.innerHTML = `
+
+            <td>
+                <strong>${escapeHTML(order.orderId)}</strong>
+            </td>
+
+            <td>
+                ${formatDate(order.date)}
+            </td>
+
+            <td>
+                ${escapeHTML(order.customerName)}
+                <br>
+                <small>
+                    ${escapeHTML(order.email)}
+                </small>
+            </td>
+
+            <td>
+                ${escapeHTML(order.phone)}
+            </td>
+
+            <td>
+                ${escapeHTML(order.package)}
+            </td>
+
+            <td>
+                Rs. ${escapeHTML(order.price)}
+            </td>
+
+            <td>
+                ${escapeHTML(order.paymentMethod)}
+            </td>
+
+            <td>
+
+                <span class="status ${escapeHTML(order.status)}">
+
+                    ${escapeHTML(order.status)}
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <select
+                    class="status-select"
+                    onchange="changeStatus(
+                        '${escapeJS(order.orderId)}',
+                        this.value
+                    )"
+                >
+
+                    <option
+                        ${order.status === "Pending" ? "selected" : ""}
+                    >
+                        Pending
+                    </option>
+
+                    <option
+                        ${order.status === "Processing" ? "selected" : ""}
+                    >
+                        Processing
+                    </option>
+
+                    <option
+                        ${order.status === "Paid" ? "selected" : ""}
+                    >
+                        Paid
+                    </option>
+
+                    <option
+                        ${order.status === "Completed" ? "selected" : ""}
+                    >
+                        Completed
+                    </option>
+
+                    <option
+                        ${order.status === "Rejected" ? "selected" : ""}
+                    >
+                        Rejected
+                    </option>
+
+                </select>
+
+            </td>
+
+        `;
+
+        body.appendChild(row);
+
+    });
+
+}
+
+
+/* =====================================================
+   CHANGE STATUS
+===================================================== */
+
+async function changeStatus(
+    orderId,
+    newStatus
+){
+
+    if(!confirm(
+        "Change order status to " +
+        newStatus +
+        "?"
+    )){
+
+        loadOrders();
+
+        return;
+
+    }
+
+
+    try{
+
+        const url =
+            API_URL +
+            "?action=updateStatus" +
+            "&orderId=" +
+            encodeURIComponent(orderId) +
+            "&status=" +
+            encodeURIComponent(newStatus);
+
+
+        const response =
+            await fetch(url, {
+                method:"POST"
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if(!data.success){
+
+            throw new Error(
+                data.message ||
+                "Update failed"
+            );
+
+        }
+
+
+        alert(
+            "✅ Order status updated!"
+        );
+
+
+        loadOrders();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "❌ Failed to update order."
+        );
+
+        loadOrders();
+
+    }
+
+}
+
+
+/* =====================================================
+   DATE FORMAT
+===================================================== */
+
+function formatDate(date){
+
+    if(!date){
+        return "";
+    }
+
+    try{
+
+        return new Date(date)
+            .toLocaleString();
+
+    }
+
+    catch{
+
+        return date;
+
+    }
+
+}
+
+
+/* =====================================================
+   SECURITY
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJS(value){
+
+    return String(value ?? "")
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'");
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadOrders();
+
+</script>
+
+</body>
+</html>
